@@ -1,5 +1,5 @@
 import Command from "../core/command";
-import {CommonLibrary, logs, botHasPermission} from "../core/lib";
+import {CommonLibrary, logs, botHasPermission, clean} from "../core/lib";
 import {Config, Storage} from "../core/structures";
 import {PermissionNames, getPermissionLevel} from "../core/permissions";
 import {Permissions} from "discord.js";
@@ -122,6 +122,24 @@ export default new Command({
 					$.message.delete({timeout: 5000}).catch($.handler.bind($));
 				$.channel.send(`Nickname set to \`${nickName}\``)
 					.then(m => m.delete({timeout: 5000}));
+			}
+		}),
+		eval: new Command({
+			description: "Evaluate code.",
+			permission: Command.PERMISSIONS.BOT_OWNER,
+			async run($: CommonLibrary): Promise<any>
+			{
+				try {
+					const code = $.args.join(" ");
+					let evaled = eval(code);
+
+					if (typeof(evaled) !== "string")
+						evaled = require("util").inspect(evaled);
+					
+						$.channel.send(clean(evaled), {code:"x1"});
+				} catch (err) {
+					$.channel.send(`\`ERROR\` \`\`\`x1\n${clean(err)}\n\`\`\``);
+				}
 			}
 		}),
 		guilds: new Command({
