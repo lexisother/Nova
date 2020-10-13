@@ -63,7 +63,6 @@ export default new Command({
 				async run($: CommonLibrary): Promise<any>
 				{
 					const type = $.args[0];
-					
 					if(type in logs)
 						$.channel.send(getLogBuffer(type));
 					else
@@ -126,6 +125,7 @@ export default new Command({
 		}),
 		eval: new Command({
 			description: "Evaluate code.",
+			usage: "<code>",
 			permission: Command.PERMISSIONS.BOT_OWNER,
 			async run($: CommonLibrary): Promise<any>
 			{
@@ -135,7 +135,6 @@ export default new Command({
 
 					if (typeof(evaled) !== "string")
 						evaled = require("util").inspect(evaled);
-					
 						$.channel.send(clean(evaled), {code:"x1"});
 				} catch (err) {
 					$.channel.send(`\`ERROR\` \`\`\`x1\n${clean(err)}\n\`\`\``);
@@ -155,10 +154,10 @@ export default new Command({
 		activity: new Command({
 			description: "Set the activity of the bot.",
 			permission: Command.PERMISSIONS.BOT_SUPPORT,
-			usage: "<type> <string>",
+			usage: "<type> <string> (url)",
 			async run($: CommonLibrary): Promise<any>
 			{
-				$.client.user?.setActivity(".help", {
+				$.client.user?.setActivity("n!help", {
 					type: "LISTENING"
 				});
 				$.channel.send("Activity set to default.")
@@ -168,10 +167,15 @@ export default new Command({
 				async run($: CommonLibrary): Promise<any>
 				{
 					const type = $.args[0];
-					
 					if(activities.includes(type)) {
-						$.client.user?.setActivity($.args.slice(1).join(" "), {type: $.args[0].toUpperCase()})
-						$.channel.send(`Set activity to \`${$.args[0].toUpperCase()}\` \`${$.args.slice(1).join(" ")}\`.`)
+						if($.args[0].toUpperCase() === "STREAMING") {
+							$.client.user?.setActivity($.args.slice(2).join(" "), {type: $.args[0].toUpperCase(), url: $.args[1]})
+							$.channel.send(`Set activity to \`${$.args[0].toUpperCase()}\` \`${$.args.slice(2).join(" ")}\` at \`${$.args[1]}\`.`)
+						}
+						else {
+							$.client.user?.setActivity($.args.slice(1).join(" "), {type: $.args[0].toUpperCase()})
+							$.channel.send(`Set activity to \`${$.args[0].toUpperCase()}\` \`${$.args.slice(1).join(" ")}\`.`)
+						}
 					}
 					else
 						$.channel.send(`Couldn't find an activity type named \`${type}\`! The available types are \`[${activities.join(", ")}]\`.`);
