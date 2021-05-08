@@ -21,7 +21,9 @@ overrides:
       project: 'tsconfig.json'
     rules:
       eqeqeq: off
+      no-var: off
       '@typescript-eslint/naming-convention': off
+      '@typescript-eslint/ban-types': off
       require-await: off
       '@typescript-eslint/no-dynamic-delete': off
       no-undefined: off
