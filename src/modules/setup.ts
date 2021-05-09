@@ -1,7 +1,8 @@
-import {existsSync as exists} from 'fs';
-import inquirer from 'inquirer';
-import Storage from './storage';
+import {existsSync as exists} from "fs";
+import inquirer from "inquirer";
+
 import {Config} from "../structures";
+import Storage from "./storage";
 
 const prompts = [
     {
@@ -30,7 +31,7 @@ const prompts = [
 
 export default {
     async init() {
-        while(!exists("data/config.json")) {
+        while (!exists("data/config.json")) {
             const answers = await inquirer.prompt(prompts);
             Storage.open("data");
             Config.token = answers.token as string;
@@ -43,7 +44,7 @@ export default {
     },
 
     async again() {
-        console.error("It seems the token you provided is invalid.")
+        console.error("It seems the token you provided is invalid.");
 
         const answers = await inquirer.prompt(prompts.slice(0, 1));
         Config.token = answers.token as string;
@@ -51,4 +52,4 @@ export default {
         // eslint-disable-next-line no-process-exit
         process.exit();
     }
-}
+};

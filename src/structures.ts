@@ -1,5 +1,5 @@
-import {select, GenericJSON, GenericStructure} from './lib';
-import FileManager from './modules/storage';
+import {select, GenericJSON, GenericStructure} from "./lib";
+import FileManager from "./modules/storage";
 
 class ConfigStructure extends GenericStructure {
     public token: string;

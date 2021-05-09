@@ -1,5 +1,5 @@
-import {client} from '../index';
-import { Config } from '../structures';
+import {client} from "../index";
+import {Config} from "../structures";
 
 client.once("ready", () => {
     if (client.user) {
@@ -9,6 +9,6 @@ client.once("ready", () => {
         client.user.setActivity({
             type: "LISTENING",
             name: `${Config.prefix}help`
-        })
+        });
     }
-})
+});
