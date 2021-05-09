@@ -10,7 +10,5 @@ module.exports = {
     bracketSpacing: false,
     jsxBracketSameLine: false,
     arrowParens: "always",
-    endOfLine: "auto",
-    importOrder: ["^discord\.js(.*)$", "^onion-lasers(.*)$", "^[./]"],
-    importOrderSeparation: true,
+    endOfLine: "auto"
 };

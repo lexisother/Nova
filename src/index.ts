@@ -4,8 +4,6 @@ import {Client, Permissions} from "discord.js";
 
 import {launch} from "onion-lasers";
 
-import "./modules/globals";
-import "./modules/ready";
 import setup from "./modules/setup";
 import {Config} from "./structures";
 
@@ -49,3 +47,6 @@ launch(client, path.join(__dirname, "commands"), {
         }
     ]
 });
+
+import "./modules/globals";
+import "./modules/ready";
