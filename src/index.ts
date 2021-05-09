@@ -6,6 +6,7 @@ import {launch} from "onion-lasers";
 
 import setup from "./modules/setup";
 import {Config} from "./structures";
+import {toTitleCase} from "./lib";
 
 export const client = new Client();
 
@@ -15,6 +16,7 @@ setup.init().then(() => {
 
 launch(client, path.join(__dirname, "commands"), {
     getPrefix: () => "n!",
+    categoryTransformer: toTitleCase,
     permissionLevels: [
         {
             name: "User",

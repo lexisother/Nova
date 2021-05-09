@@ -39,3 +39,7 @@ export abstract class GenericStructure {
 export function requireAllCasesHandledFor(variable: never): never {
     throw new Error(`This function should never be called but got the value: ${variable}`);
 }
+
+export function toTitleCase(text: string): string {
+    return text.replace(/([^\W_]+[^\s-]*) */g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
+}

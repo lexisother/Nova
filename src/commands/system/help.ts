@@ -1,12 +1,12 @@
 import {MessageEmbed} from "discord.js";
 
 import {
-    RestCommand,
+    CHANNEL_TYPE,
     NamedCommand,
+    RestCommand,
     getCommandInfo,
     getCommandList,
     getPermissionName,
-    CHANNEL_TYPE,
     paginate
 } from "onion-lasers";
 
